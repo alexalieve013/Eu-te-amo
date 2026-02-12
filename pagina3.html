@@ -48,14 +48,19 @@ body {
     white-space: pre-line;
 }
 
-.botao {
+.botao, #revelarFoto {
     padding: 15px 40px;
     background: #ff4d6d;
     color: white;
     text-decoration: none;
     border-radius: 10px;
     display: none;
+    cursor: pointer;
     animation: aparecer 1s forwards;
+}
+
+#revelarFoto:hover, .botao:hover {
+    background: #ff6680;
 }
 
 @keyframes aparecer {
@@ -74,6 +79,16 @@ body {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-800px); opacity: 0; }
 }
+
+/* Foto revelada */
+#foto {
+    display: none;
+    max-width: 80%;
+    border-radius: 20px;
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 3s ease-in;
+}
 </style>
 </head>
 
@@ -85,8 +100,15 @@ body {
     <div class="box">
         <div class="texto" id="texto"></div>
         <a href="pagina3.html" class="botao" id="botao">Continuar ❤️</a>
+        <button id="revelarFoto">Revelar Foto 📸</button>
+        <br>
+        <img id="foto" src="https://github.com/alexalieve013/Eu-te-amo/blob/main/ben.jpg?raw=true" alt="Foto">
     </div>
 </div>
+
+<audio id="musica">
+    <source src="https://raw.githubusercontent.com/alexalieve013/Eu-te-amo/main/Luan%20Santana%20-%20Te%20esperando%20(Clipe%20Oficial)%20-%20Part.%20Giovanna%20Lancellotti%20-%20Luan%20Santana%20(youtube).mp3" type="audio/mpeg">
+</audio>
 
 <script>
 const textoCompleto = `Benjamim, amo você Cabeça de nos todos, continue sempre sendo esse menino incrivel, bricalhão e sorridente
@@ -95,6 +117,9 @@ que você cresça e realize esse seu sonho de ser, policia, obrigado por me faze
 const elementoTexto = document.getElementById("texto");
 const botao = document.getElementById("botao");
 const overlay = document.getElementById("overlay");
+const revelarFoto = document.getElementById("revelarFoto");
+const foto = document.getElementById("foto");
+const musica = document.getElementById("musica");
 
 let i = 0;
 
@@ -107,6 +132,7 @@ function escreverTexto() {
     } else {
         overlay.style.opacity = "1";
         botao.style.display = "inline-block";
+        revelarFoto.style.display = "inline-block"; // botão de revelar foto aparece
         criarCoracoes();
     }
 }
@@ -127,7 +153,17 @@ function criarCoracoes() {
     }, 300);
 }
 
-// Inicia a escrita do texto automaticamente ao carregar a página
+// Função que revela a foto e toca música
+revelarFoto.addEventListener("click", () => {
+    foto.style.display = "block";
+    setTimeout(() => {
+        foto.style.opacity = 1; // fade-in
+    }, 50);
+
+    musica.currentTime = 0;
+    musica.play().catch(() => {});
+});
+
 window.addEventListener("load", () => {
     escreverTexto();
 });
