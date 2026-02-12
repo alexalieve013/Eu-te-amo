@@ -118,13 +118,9 @@ const musica = document.getElementById("musica");
 const overlay = document.getElementById("overlay");
 
 let i = 0;
+let musicaIniciada = false;
 
-// Música começa imediatamente
-window.addEventListener("load", () => {
-    musica.play().catch(() => {});
-    escreverTexto();
-});
-
+// Função que escreve o texto letra por letra
 function escreverTexto() {
     if (i < textoCompleto.length) {
         elementoTexto.innerHTML += textoCompleto.charAt(i);
@@ -137,6 +133,7 @@ function escreverTexto() {
     }
 }
 
+// Função que cria corações subindo
 function criarCoracoes() {
     setInterval(() => {
         const coracao = document.createElement("div");
@@ -151,6 +148,20 @@ function criarCoracoes() {
         }, 5000);
     }, 300);
 }
+
+// Inicia música no primeiro toque/click (necessário em celulares)
+window.addEventListener("click", () => {
+    if (!musicaIniciada) {
+        musica.currentTime = 0;
+        musica.play().catch(() => {});
+        musicaIniciada = true;
+    }
+});
+
+// Começa a escrever o texto assim que a página carrega
+window.addEventListener("load", () => {
+    escreverTexto();
+});
 </script>
 
 </body>
