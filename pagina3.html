@@ -1,3 +1,13 @@
+Perfeito! 😄 Então vamos atualizar sua Página 2 para:
+
+Novo fundo (azul escuro com corações)
+
+Remover o botão de iniciar (texto já começa devagar assim que a página carrega)
+
+Música será adicionada depois
+
+Aqui está o código atualizado:
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,7 +23,7 @@ body {
 
 .fundo {
     height: 100vh;
-    background-image: url("https://img.freepik.com/vetores-gratis/fundo-abstrato-do-bokeh-com-coracoes_1053-257.jpg");
+    background-image: url("https://img.freepik.com/vetores-gratis/coracoes-fundo-azul-escuro_78370-2880.jpg?semt=ais_user_personalization&w=740&q=80");
     background-size: cover;
     background-position: center;
     display: flex;
@@ -74,34 +84,6 @@ body {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-800px); opacity: 0; }
 }
-
-/* Botão inicial grande */
-#startButton {
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 25px 50px;
-    font-size: 28px;
-    background: #ff4d6d;
-    color: white;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    z-index: 10;
-    box-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
-    animation: pulse 1.5s infinite;
-}
-
-#startButton:hover {
-    background: #ff6680;
-}
-
-@keyframes pulse {
-    0% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.05); }
-    100% { transform: translate(-50%, -50%) scale(1); }
-}
 </style>
 </head>
 
@@ -114,33 +96,25 @@ body {
         <div class="texto" id="texto"></div>
         <a href="pagina3.html" class="botao" id="botao">Continuar ❤️</a>
     </div>
-
-    <button id="startButton">💖 Toque para começar 💖</button>
 </div>
-
-<audio id="musica" loop>
-    <source src="https://raw.githubusercontent.com/alexalieve013/Eu-te-amo/main/Luan%20Santana%20-%20Te%20esperando%20(Clipe%20Oficial)%20-%20Part.%20Giovanna%20Lancellotti%20-%20Luan%20Santana%20(youtube).mp3" type="audio/mpeg">
-</audio>
 
 <script>
 const textoCompleto = `Benjamim, amo você Cabeça de nos todos`;
 
 const elementoTexto = document.getElementById("texto");
 const botao = document.getElementById("botao");
-const musica = document.getElementById("musica");
 const overlay = document.getElementById("overlay");
-const startButton = document.getElementById("startButton");
 
 let i = 0;
 
-// Função que escreve o texto letra por letra
+// Função que escreve o texto letra por letra automaticamente
 function escreverTexto() {
     if (i < textoCompleto.length) {
         elementoTexto.innerHTML += textoCompleto.charAt(i);
         i++;
         setTimeout(escreverTexto, 45);
     } else {
-        overlay.style.opacity = "1";Benjam
+        overlay.style.opacity = "1";
         botao.style.display = "inline-block";
         criarCoracoes();
     }
@@ -162,11 +136,8 @@ function criarCoracoes() {
     }, 300);
 }
 
-// Quando o usuário toca no botão, inicia tudo
-startButton.addEventListener("click", () => {
-    musica.currentTime = 0;
-    musica.play().catch(() => {});
-    startButton.style.display = "none"; // esconde o botão
+// Inicia a escrita do texto automaticamente ao carregar a página
+window.addEventListener("load", () => {
     escreverTexto();
 });
 </script>
