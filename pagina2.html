@@ -45,6 +45,7 @@ body {
     font-size: 24px;
     margin-bottom: 30px;
     min-height: 220px;
+    white-space: pre-line;
 }
 
 .botao {
@@ -66,7 +67,6 @@ body {
 .coracao {
     position: absolute;
     color: #ff4d6d;
-    font-size: 20px;
     animation: subir 5s linear infinite;
 }
 
@@ -94,6 +94,7 @@ body {
 
 <script>
 const textoCompleto = `Alexia...
+
 Não sei o que fez você mudar assim de repente...
 
 Queria ao menos poder entender o que aconteceu,
@@ -118,15 +119,20 @@ const overlay = document.getElementById("overlay");
 
 let i = 0;
 
+// Música começa imediatamente
+window.addEventListener("load", () => {
+    musica.play().catch(() => {});
+    escreverTexto();
+});
+
 function escreverTexto() {
     if (i < textoCompleto.length) {
         elementoTexto.innerHTML += textoCompleto.charAt(i);
         i++;
-        setTimeout(escreverTexto, 50);
+        setTimeout(escreverTexto, 45);
     } else {
         overlay.style.opacity = "1";
         botao.style.display = "inline-block";
-        musica.play();
         criarCoracoes();
     }
 }
@@ -145,8 +151,6 @@ function criarCoracoes() {
         }, 5000);
     }, 300);
 }
-
-escreverTexto();
 </script>
 
 </body>
