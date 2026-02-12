@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Página 2</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.fundo {
+    height: 100vh;
+    background-image: url("https://img.freepik.com/vetores-gratis/fundo-abstrato-do-bokeh-com-coracoes_1053-257.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: 3s;
+}
+
+.box {
+    position: relative;
+    background: rgba(0,0,0,0.6);
+    padding: 40px;
+    border-radius: 20px;
+    color: white;
+    max-width: 800px;
+    z-index: 2;
+}
+
+.texto {
+    font-size: 24px;
+    margin-bottom: 30px;
+    min-height: 220px;
+    white-space: pre-line;
+}
+
+.botao {
+    padding: 15px 40px;
+    background: #ff4d6d;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    display: none;
+    animation: aparecer 1s forwards;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Corações */
+.coracao {
+    position: absolute;
+    color: #ff4d6d;
+    animation: subir 5s linear infinite;
+}
+
+@keyframes subir {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-800px); opacity: 0; }
+}
+
+/* Botão inicial grande */
+#startButton {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px 50px;
+    font-size: 28px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+    animation: pulse 1.5s infinite;
+}
+
+#startButton:hover {
+    background: #ff6680;
+}
+
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.05); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fundo">
+    <div class="overlay" id="overlay"></div>
+
+    <div class="box">
+        <div class="texto" id="texto"></div>
+        <a href="pagina3.html" class="botao" id="botao">Continuar ❤️</a>
+    </div>
+
+    <button id="startButton">💖 Toque para começar 💖</button>
+</div>
+
+<audio id="musica" loop>
+    <source src="https://raw.githubusercontent.com/alexalieve013/Eu-te-amo/main/Luan%20Santana%20-%20Te%20esperando%20(Clipe%20Oficial)%20-%20Part.%20Giovanna%20Lancellotti%20-%20Luan%20Santana%20(youtube).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const textoCompleto = `Benjamim, amo você Cabeça de nos todos`;
+
+const elementoTexto = document.getElementById("texto");
+const botao = document.getElementById("botao");
+const musica = document.getElementById("musica");
+const overlay = document.getElementById("overlay");
+const startButton = document.getElementById("startButton");
+
+let i = 0;
+
+// Função que escreve o texto letra por letra
+function escreverTexto() {
+    if (i < textoCompleto.length) {
+        elementoTexto.innerHTML += textoCompleto.charAt(i);
+        i++;
+        setTimeout(escreverTexto, 45);
+    } else {
+        overlay.style.opacity = "1";Benjam
+        botao.style.display = "inline-block";
+        criarCoracoes();
+    }
+}
+
+// Função que cria corações subindo
+function criarCoracoes() {
+    setInterval(() => {
+        const coracao = document.createElement("div");
+        coracao.classList.add("coracao");
+        coracao.innerHTML = "❤️";
+        coracao.style.left = Math.random() * 100 + "vw";
+        coracao.style.fontSize = (20 + Math.random() * 20) + "px";
+        document.body.appendChild(coracao);
+
+        setTimeout(() => {
+            coracao.remove();
+        }, 5000);
+    }, 300);
+}
+
+// Quando o usuário toca no botão, inicia tudo
+startButton.addEventListener("click", () => {
+    musica.currentTime = 0;
+    musica.play().catch(() => {});
+    startButton.style.display = "none"; // esconde o botão
+    escreverTexto();
+});
+</script>
+
+</body>
+</html>
