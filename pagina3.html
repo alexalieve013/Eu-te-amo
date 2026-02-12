@@ -48,24 +48,27 @@ body {
     white-space: pre-line;
 }
 
+/* Botões lado a lado, mesmo tamanho */
 .botao, #revelarFoto {
-    padding: 15px 40px;
+    padding: 20px 50px;
     background: #ff4d6d;
     color: white;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 12px;
     display: none;
     cursor: pointer;
     animation: aparecer 1s forwards;
+    font-size: 22px;
 }
 
 #revelarFoto:hover, .botao:hover {
     background: #ff6680;
 }
 
-@keyframes aparecer {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
+.botao-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
 /* Corações */
@@ -73,6 +76,11 @@ body {
     position: absolute;
     color: #ff4d6d;
     animation: subir 5s linear infinite;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes subir {
@@ -99,9 +107,12 @@ body {
 
     <div class="box">
         <div class="texto" id="texto"></div>
-        <a href="pagina3.html" class="botao" id="botao">Continuar ❤️</a>
-        <button id="revelarFoto">Revelar Foto 📸</button>
-        <br>
+
+        <div class="botao-container">
+            <button id="revelarFoto">Revelar Foto 📸</button>
+            <a href="pagina3.html" class="botao" id="botao">Continuar ❤️</a>
+        </div>
+
         <img id="foto" src="https://github.com/alexalieve013/Eu-te-amo/blob/main/ben.jpg?raw=true" alt="Foto">
     </div>
 </div>
@@ -132,7 +143,7 @@ function escreverTexto() {
     } else {
         overlay.style.opacity = "1";
         botao.style.display = "inline-block";
-        revelarFoto.style.display = "inline-block"; // botão de revelar foto aparece
+        revelarFoto.style.display = "inline-block";
         criarCoracoes();
     }
 }
