@@ -123,7 +123,7 @@ body {
 </audio>
 
 <script>
-const textoCompleto = Alexia...
+const textoCompleto = `Alexia...
 
 Até hoje eu tento entender o que aconteceu,
 em que momento tudo mudou assim, tão de repente.
@@ -154,7 +154,7 @@ nem que já esteja velhinha gagá..."
 Porque o que eu sinto não é passageiro.
 É sincero.
 É profundo.
-É você. ❤️;
+É você. ❤️`;
 
 const elementoTexto = document.getElementById("texto");
 const botao = document.getElementById("botao");
@@ -164,7 +164,6 @@ const startButton = document.getElementById("startButton");
 
 let i = 0;
 
-// Função que escreve o texto letra por letra
 function escreverTexto() {
     if (i < textoCompleto.length) {
         elementoTexto.innerHTML += textoCompleto.charAt(i);
@@ -177,7 +176,6 @@ function escreverTexto() {
     }
 }
 
-// Função que cria corações subindo
 function criarCoracoes() {
     setInterval(() => {
         const coracao = document.createElement("div");
@@ -193,11 +191,10 @@ function criarCoracoes() {
     }, 300);
 }
 
-// Quando o usuário toca no botão, inicia tudo
 startButton.addEventListener("click", () => {
     musica.currentTime = 0;
     musica.play().catch(() => {});
-    startButton.style.display = "none"; // esconde o botão
+    startButton.style.display = "none";
     escreverTexto();
 });
 </script>
