@@ -3,16 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Página 2</title>
+
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #000;
+    overflow-x: hidden;
 }
 
 .fundo {
     min-height: 100vh;
-    background-image: url("https://img.freepik.com/vetores-gratis/coracoes-fundo-azul-escuro_78370-2880.jpg?semt=ais_user_personalization&w=740&q=80");
+    background-image: url("https://img.freepik.com/vetores-gratis/coracoes-fundo-azul-escuro_78370-2880.jpg");
     background-size: cover;
     background-position: center;
     display: flex;
@@ -22,6 +24,7 @@ body {
     position: relative;
     padding: 20px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .overlay {
@@ -34,7 +37,7 @@ body {
 .box {
     position: relative;
     z-index: 2;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
     border-radius: 20px;
     padding: 30px;
     max-width: 800px;
@@ -44,26 +47,28 @@ body {
 
 .texto {
     font-size: 22px;
-    line-height: 1.5;
+    line-height: 1.6;
     margin-bottom: 25px;
+    white-space: pre-line;
 }
 
 .botao-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .botao, #revelarFoto {
-    padding: 18px 45px;
+    padding: 15px 35px;
     background: #ff4d6d;
     border: none;
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 12px;
     cursor: pointer;
     text-decoration: none;
-    display: inline-block;
+    transition: 0.3s;
 }
 
 .botao:hover, #revelarFoto:hover {
@@ -72,29 +77,30 @@ body {
 
 #foto {
     display: none;
-    max-width: 80%;
-    margin: 0 auto;
+    max-width: 90%;
+    margin-top: 20px;
     border-radius: 15px;
     opacity: 0;
-    transition: opacity 3s ease-in;
+    transition: opacity 2s ease-in;
 }
 
+/* Corações */
 .coracao {
     position: absolute;
     color: #ff4d6d;
-    font-size: 24px;
-    animation: subir 5s linear infinite;
+    animation: subir 5s linear forwards;
+    pointer-events: none;
 }
 
 @keyframes subir {
     0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-800px); opacity: 0; }
+    100% { transform: translateY(-100vh); opacity: 0; }
 }
 </style>
 </head>
 <body>
 
-<div class="fundo">
+<div class="fundo" id="fundo">
     <div class="overlay"></div>
 
     <div class="box">
@@ -126,10 +132,10 @@ Com carinho para sempre. 💙
 
         <div class="botao-container">
             <button id="revelarFoto">Revelar Foto 📸</button>
-            <a href="pagina4.html" class="botao" id="botao">Continuar ❤️</a>
+            <a href="pagina4.html" class="botao">Continuar ❤️</a>
         </div>
 
-        <img id="foto" src="https://github.com/alexalieve013/Eu-te-amo/blob/main/ben.jpg?raw=true" alt="Foto">
+        <img id="foto" src="https://raw.githubusercontent.com/alexalieve013/Eu-te-amo/main/ben.jpg" alt="Foto">
     </div>
 </div>
 
@@ -138,29 +144,30 @@ Com carinho para sempre. 💙
 </audio>
 
 <script>
-// Função para corações animados
+const fundo = document.getElementById("fundo");
+
 function criarCoracoes() {
     setInterval(() => {
         const coracao = document.createElement("div");
         coracao.className = "coracao";
-        coracao.innerText = "❤️";
-        coracao.style.left = Math.random() * 100 + "vw";
+        coracao.innerHTML = "❤️";
+        coracao.style.left = Math.random() * 100 + "%";
+        coracao.style.bottom = "0";
         coracao.style.fontSize = (20 + Math.random() * 20) + "px";
-        document.body.appendChild(coracao);
+        fundo.appendChild(coracao);
         setTimeout(() => coracao.remove(), 5000);
-    }, 400);
+    }, 500);
 }
 
-// Iniciar corações
 criarCoracoes();
 
-// Ao clicar em revelar foto, mostra a foto e toca música
 document.getElementById("revelarFoto").addEventListener("click", () => {
     const foto = document.getElementById("foto");
-    foto.style.display = "block";
-    setTimeout(() => { foto.style.opacity = 1; }, 50);
-
     const musica = document.getElementById("musica");
+
+    foto.style.display = "block";
+    setTimeout(() => foto.style.opacity = "1", 50);
+
     musica.currentTime = 0;
     musica.play().catch(() => {});
 });
