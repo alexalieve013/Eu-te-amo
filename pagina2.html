@@ -5,86 +5,148 @@
 <title>Página 2</title>
 
 <style>
-    body { 
-        margin: 0; 
-        font-family: Arial, sans-serif;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
 
-    .fundo {
-        height: 100vh;
-        background-image: url("https://img.freepik.com/vetores-gratis/fundo-abstrato-do-bokeh-com-coracoes_1053-257.jpg");
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
+.fundo {
+    height: 100vh;
+    background-image: url("https://img.freepik.com/vetores-gratis/fundo-abstrato-do-bokeh-com-coracoes_1053-257.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
 
-    .box {
-        background: rgba(0,0,0,0.5);
-        padding: 30px;
-        border-radius: 15px;
-        color: white;
-        max-width: 800px;
-    }
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: 3s;
+}
 
-    .texto {
-        font-size: 24px;
-        margin-bottom: 30px;
-        min-height: 200px;
-    }
+.box {
+    position: relative;
+    background: rgba(0,0,0,0.6);
+    padding: 40px;
+    border-radius: 20px;
+    color: white;
+    max-width: 800px;
+    z-index: 2;
+}
 
-    .botao {
-        padding: 12px 35px;
-        background: #ff4d6d;
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        display: none;
-    }
+.texto {
+    font-size: 24px;
+    margin-bottom: 30px;
+    min-height: 220px;
+}
+
+.botao {
+    padding: 15px 40px;
+    background: #ff4d6d;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    display: none;
+    animation: aparecer 1s forwards;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Corações */
+.coracao {
+    position: absolute;
+    color: #ff4d6d;
+    font-size: 20px;
+    animation: subir 5s linear infinite;
+}
+
+@keyframes subir {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-800px); opacity: 0; }
+}
 </style>
 </head>
 
 <body>
 
 <div class="fundo">
+    <div class="overlay" id="overlay"></div>
+
     <div class="box">
         <div class="texto" id="texto"></div>
-        <a href="pagina3.html" class="botao" id="botao">Avançar</a>
+        <a href="pagina3.html" class="botao" id="botao">Continuar ❤️</a>
     </div>
 </div>
 
-<audio id="musica">
+<audio id="musica" loop>
     <source src="https://raw.githubusercontent.com/alexalieve013/Eu-te-amo/main/Luan%20Santana%20-%20Te%20esperando%20(Clipe%20Oficial)%20-%20Part.%20Giovanna%20Lancellotti%20-%20Luan%20Santana%20(youtube).mp3" type="audio/mpeg">
 </audio>
 
 <script>
-    const textoCompleto = `Alexia, não sei o que fez você mudar assim de repente...
-Queria ao menos poder entender o que aconteceu, mas já vi que você não quer papo.
-Se eu te fiz qualquer coisa, peço desculpas, nunca seria minha intenção.
-Você é uma mulher incrível e guerreira, eu te admiro muito e você sabe disso.
-Você sabe que eu nunca irei desistir de você.
-Como diria Luan Santana: "Eu vou estar te esperando, nem que já esteja velhinha gagá".`;
+const textoCompleto = `Alexia...
+Não sei o que fez você mudar assim de repente...
 
-    const elementoTexto = document.getElementById("texto");
-    const botao = document.getElementById("botao");
-    const musica = document.getElementById("musica");
+Queria ao menos poder entender o que aconteceu,
+mas já vi que você não quer papo.
 
-    let i = 0;
+Se eu te fiz qualquer coisa, me perdoa...
+Nunca seria minha intenção.
 
-    function escreverTexto() {
-        if (i < textoCompleto.length) {
-            elementoTexto.innerHTML += textoCompleto.charAt(i);
-            i++;
-            setTimeout(escreverTexto, 40);
-        } else {
-            botao.style.display = "inline-block";
-            musica.play();
-        }
+Você é uma mulher incrível e guerreira.
+Eu te admiro muito... e você sabe disso.
+
+Eu nunca vou desistir de você.
+
+Como diria Luan Santana:
+"Eu vou estar te esperando,
+nem que já esteja velhinha gagá..." ❤️`;
+
+const elementoTexto = document.getElementById("texto");
+const botao = document.getElementById("botao");
+const musica = document.getElementById("musica");
+const overlay = document.getElementById("overlay");
+
+let i = 0;
+
+function escreverTexto() {
+    if (i < textoCompleto.length) {
+        elementoTexto.innerHTML += textoCompleto.charAt(i);
+        i++;
+        setTimeout(escreverTexto, 50);
+    } else {
+        overlay.style.opacity = "1";
+        botao.style.display = "inline-block";
+        musica.play();
+        criarCoracoes();
     }
+}
 
-    escreverTexto();
+function criarCoracoes() {
+    setInterval(() => {
+        const coracao = document.createElement("div");
+        coracao.classList.add("coracao");
+        coracao.innerHTML = "❤️";
+        coracao.style.left = Math.random() * 100 + "vw";
+        coracao.style.fontSize = (20 + Math.random() * 20) + "px";
+        document.body.appendChild(coracao);
+
+        setTimeout(() => {
+            coracao.remove();
+        }, 5000);
+    }, 300);
+}
+
+escreverTexto();
 </script>
 
 </body>
