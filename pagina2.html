@@ -58,6 +58,25 @@ body {
     animation: aparecer 1s forwards;
 }
 
+#startButton {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    font-size: 20px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#startButton:hover {
+    background: #ff6680;
+}
+
 @keyframes aparecer {
     from { opacity: 0; transform: scale(0.8); }
     to { opacity: 1; transform: scale(1); }
@@ -86,6 +105,8 @@ body {
         <div class="texto" id="texto"></div>
         <a href="pagina3.html" class="botao" id="botao">Continuar ❤️</a>
     </div>
+
+    <button id="startButton">💖 Toque para começar 💖</button>
 </div>
 
 <audio id="musica" loop>
@@ -116,9 +137,9 @@ const elementoTexto = document.getElementById("texto");
 const botao = document.getElementById("botao");
 const musica = document.getElementById("musica");
 const overlay = document.getElementById("overlay");
+const startButton = document.getElementById("startButton");
 
 let i = 0;
-let musicaIniciada = false;
 
 // Função que escreve o texto letra por letra
 function escreverTexto() {
@@ -149,17 +170,11 @@ function criarCoracoes() {
     }, 300);
 }
 
-// Inicia música no primeiro toque/click (necessário em celulares)
-window.addEventListener("click", () => {
-    if (!musicaIniciada) {
-        musica.currentTime = 0;
-        musica.play().catch(() => {});
-        musicaIniciada = true;
-    }
-});
-
-// Começa a escrever o texto assim que a página carrega
-window.addEventListener("load", () => {
+// Quando o usuário toca no botão, inicia tudo
+startButton.addEventListener("click", () => {
+    musica.currentTime = 0;
+    musica.play().catch(() => {});
+    startButton.style.display = "none"; // esconde o botão
     escreverTexto();
 });
 </script>
