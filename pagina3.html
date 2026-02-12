@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Página 2</title>
-
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    overflow: hidden;
+    background: #000;
 }
 
 .fundo {
-    height: 100vh;
+    min-height: 100vh;
     background-image: url("https://img.freepik.com/vetores-gratis/coracoes-fundo-azul-escuro_78370-2880.jpg?semt=ais_user_personalization&w=740&q=80");
     background-size: cover;
     background-position: center;
@@ -21,59 +20,69 @@ body {
     align-items: center;
     text-align: center;
     position: relative;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.7);
-    opacity: 0;
-    transition: 3s;
+    background: rgba(0,0,0,0.6);
+    z-index: 1;
 }
 
 .box {
     position: relative;
-    background: rgba(0,0,0,0.6);
-    padding: 40px;
-    border-radius: 20px;
-    color: white;
-    max-width: 800px;
     z-index: 2;
+    background: rgba(0,0,0,0.5);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 800px;
+    width: 100%;
+    color: white;
 }
 
 .texto {
-    font-size: 24px;
-    margin-bottom: 30px;
-    min-height: 220px;
-    white-space: pre-line;
-}
-
-/* Botões lado a lado, mesmo tamanho */
-.botao, #revelarFoto {
-    padding: 20px 50px;
-    background: #ff4d6d;
-    color: white;
-    text-decoration: none;
-    border-radius: 12px;
-    display: inline-block;
-    cursor: pointer;
     font-size: 22px;
-}
-
-#revelarFoto:hover, .botao:hover {
-    background: #ff6680;
+    line-height: 1.5;
+    margin-bottom: 25px;
 }
 
 .botao-container {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-/* Corações */
+.botao, #revelarFoto {
+    padding: 18px 45px;
+    background: #ff4d6d;
+    border: none;
+    color: white;
+    font-size: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.botao:hover, #revelarFoto:hover {
+    background: #ff6680;
+}
+
+#foto {
+    display: none;
+    max-width: 80%;
+    margin: 0 auto;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 3s ease-in;
+}
+
 .coracao {
     position: absolute;
     color: #ff4d6d;
+    font-size: 24px;
     animation: subir 5s linear infinite;
 }
 
@@ -81,29 +90,17 @@ body {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-800px); opacity: 0; }
 }
-
-/* Foto centralizada */
-#foto {
-    display: none;
-    max-width: 80%;
-    border-radius: 20px;
-    margin: 20px auto 0 auto;
-    opacity: 0;
-    transition: opacity 3s ease-in;
-}
 </style>
 </head>
-
 <body>
 
 <div class="fundo">
-    <div class="overlay" id="overlay"></div>
+    <div class="overlay"></div>
 
     <div class="box">
-        <!-- Texto fixo -->
-        <div class="texto" id="texto">
-Benjamim, amo você Cabeça de nos todos, continue sempre sendo esse menino incrível, brincalhão e sorridente
-que você cresça e realize esse seu sonho de ser policial. Obrigado por me fazer uma pessoa feliz, espero que um dia possa te encontrar de novo, cabeça de nederite.
+        <div class="texto">
+Benjamim, amo você Cabeça de nos todos, continue sempre sendo esse menino incrível, brincalhão e sorridente.
+Que você cresça e realize seu sonho de ser policial. Obrigado por me fazer feliz, espero que um dia possamos nos encontrar de novo.
         </div>
 
         <div class="botao-container">
@@ -115,48 +112,36 @@ que você cresça e realize esse seu sonho de ser policial. Obrigado por me faze
     </div>
 </div>
 
-<!-- Música nova -->
 <audio id="musica">
     <source src="https://raw.githubusercontent.com/alexalieve013/Eu-te-amo/main/Ana%20Vilela%20-%20Trem-Bala%20-%20(Clipe%20Oficial)%20-%20Ana%20Vilela%20(youtube).mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const overlay = document.getElementById("overlay");
-const revelarFoto = document.getElementById("revelarFoto");
-const foto = document.getElementById("foto");
-const musica = document.getElementById("musica");
-
-// Mostrar corações mesmo com texto fixo
+// Função para corações animados
 function criarCoracoes() {
     setInterval(() => {
         const coracao = document.createElement("div");
-        coracao.classList.add("coracao");
-        coracao.innerHTML = "❤️";
+        coracao.className = "coracao";
+        coracao.innerText = "❤️";
         coracao.style.left = Math.random() * 100 + "vw";
         coracao.style.fontSize = (20 + Math.random() * 20) + "px";
         document.body.appendChild(coracao);
-
-        setTimeout(() => {
-            coracao.remove();
-        }, 5000);
-    }, 300);
+        setTimeout(() => coracao.remove(), 5000);
+    }, 400);
 }
 
-// Ao clicar em revelar foto
-revelarFoto.addEventListener("click", () => {
-    foto.style.display = "block";
-    setTimeout(() => {
-        foto.style.opacity = 1;
-    }, 50);
+// Iniciar corações
+criarCoracoes();
 
+// Ao clicar em revelar foto, mostra a foto e toca música
+document.getElementById("revelarFoto").addEventListener("click", () => {
+    const foto = document.getElementById("foto");
+    foto.style.display = "block";
+    setTimeout(() => { foto.style.opacity = 1; }, 50);
+
+    const musica = document.getElementById("musica");
     musica.currentTime = 0;
     musica.play().catch(() => {});
-});
-
-// Iniciar corações e mostrar overlay assim que carregar
-window.addEventListener("load", () => {
-    overlay.style.opacity = "1";
-    criarCoracoes();
 });
 </script>
 
