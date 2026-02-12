@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Surpresa 💙</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    color: white;
+}
+
+.container {
+    max-width: 600px;
+    width: 90%;
+}
+
+img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.2);
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 18px 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+}
+
+button:hover {
+    background: #ff6680;
+    transform: scale(1.05);
+}
+
+#texto {
+    margin-top: 30px;
+    font-size: 20px;
+    line-height: 1.6;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 2s ease, max-height 2s ease;
+    white-space: pre-line;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <img src="https://raw.githubusercontent.com/alexalieve013/Eu-te-amo/main/bernardo.jpg" alt="Foto">
+
+    <button onclick="revelarTexto()">Revelar Texto 💙</button>
+
+    <div id="texto">
+Bernardo,
+
+Você é luz.
+É alegria.
+É aquele sorriso que muda o dia de qualquer pessoa.
+
+Que você cresça forte, sonhador e feliz.
+Nunca perca essa essência linda que faz de você alguém tão especial.
+
+O mundo é grande,
+mas o seu coração é ainda maior.
+
+
+    </div>
+</div>
+
+<script>
+function revelarTexto() {
+    const texto = document.getElementById("texto");
+    texto.style.opacity = "1";
+    texto.style.maxHeight = "500px";
+}
+</script>
+
+</body>
+</html>
