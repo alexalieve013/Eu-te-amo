@@ -55,9 +55,8 @@ body {
     color: white;
     text-decoration: none;
     border-radius: 12px;
-    display: none;
+    display: inline-block;
     cursor: pointer;
-    animation: aparecer 1s forwards;
     font-size: 22px;
 }
 
@@ -78,22 +77,17 @@ body {
     animation: subir 5s linear infinite;
 }
 
-@keyframes aparecer {
-    from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
-}
-
 @keyframes subir {
     0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(-800px); opacity: 0; }
 }
 
-/* Foto revelada */
+/* Foto centralizada */
 #foto {
     display: none;
     max-width: 80%;
     border-radius: 20px;
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
     opacity: 0;
     transition: opacity 3s ease-in;
 }
@@ -106,7 +100,11 @@ body {
     <div class="overlay" id="overlay"></div>
 
     <div class="box">
-        <div class="texto" id="texto"></div>
+        <!-- Texto fixo -->
+        <div class="texto" id="texto">
+Benjamim, amo você Cabeça de nos todos, continue sempre sendo esse menino incrível, brincalhão e sorridente
+que você cresça e realize esse seu sonho de ser policial. Obrigado por me fazer uma pessoa feliz, espero que um dia possa te encontrar de novo, cabeça de nederite.
+        </div>
 
         <div class="botao-container">
             <button id="revelarFoto">Revelar Foto 📸</button>
@@ -117,38 +115,18 @@ body {
     </div>
 </div>
 
+<!-- Música nova -->
 <audio id="musica">
-    <source src="https://raw.githubusercontent.com/alexalieve013/Eu-te-amo/main/Luan%20Santana%20-%20Te%20esperando%20(Clipe%20Oficial)%20-%20Part.%20Giovanna%20Lancellotti%20-%20Luan%20Santana%20(youtube).mp3" type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/alexalieve013/Eu-te-amo/main/Ana%20Vilela%20-%20Trem-Bala%20-%20(Clipe%20Oficial)%20-%20Ana%20Vilela%20(youtube).mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const textoCompleto = `Benjamim, amo você Cabeça de nos todos, continue sempre sendo esse menino incrivel, bricalhão e sorridente
-que você cresça e realize esse seu sonho de ser, policia, obrigado por me fazer uma pessoa felíz espero que um dia possa te encontrar de novo cabeça de nederite`;
-
-const elementoTexto = document.getElementById("texto");
-const botao = document.getElementById("botao");
 const overlay = document.getElementById("overlay");
 const revelarFoto = document.getElementById("revelarFoto");
 const foto = document.getElementById("foto");
 const musica = document.getElementById("musica");
 
-let i = 0;
-
-// Função que escreve o texto letra por letra automaticamente
-function escreverTexto() {
-    if (i < textoCompleto.length) {
-        elementoTexto.innerHTML += textoCompleto.charAt(i);
-        i++;
-        setTimeout(escreverTexto, 45);
-    } else {
-        overlay.style.opacity = "1";
-        botao.style.display = "inline-block";
-        revelarFoto.style.display = "inline-block";
-        criarCoracoes();
-    }
-}
-
-// Função que cria corações subindo
+// Mostrar corações mesmo com texto fixo
 function criarCoracoes() {
     setInterval(() => {
         const coracao = document.createElement("div");
@@ -164,19 +142,21 @@ function criarCoracoes() {
     }, 300);
 }
 
-// Função que revela a foto e toca música
+// Ao clicar em revelar foto
 revelarFoto.addEventListener("click", () => {
     foto.style.display = "block";
     setTimeout(() => {
-        foto.style.opacity = 1; // fade-in
+        foto.style.opacity = 1;
     }, 50);
 
     musica.currentTime = 0;
     musica.play().catch(() => {});
 });
 
+// Iniciar corações e mostrar overlay assim que carregar
 window.addEventListener("load", () => {
-    escreverTexto();
+    overlay.style.opacity = "1";
+    criarCoracoes();
 });
 </script>
 
