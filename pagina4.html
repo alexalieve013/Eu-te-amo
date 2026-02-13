@@ -1,3 +1,13 @@
+Perfeito! Aqui está a versão completa e pronta do seu HTML:
+
+Botão de “Avançar 💙”
+
+Texto com fade-in que não corta mais
+
+Corações azuis animados subindo
+
+Música tocando ao clicar no botão “Revelar Texto 💙”
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -20,7 +30,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Camada escura */
+/* Camada escura para melhorar leitura */
 body::before {
     content: "";
     position: fixed;
@@ -118,8 +128,8 @@ Continue sendo essa criança cheia de vida, rindo, brincando e espalhando alegri
 O mundo fica mais leve e bonito com você nele.
     </div>
 
-    <!-- Botão Página 5 -->
-    <button onclick="irPagina5()">Ir para Página 5 💙</button>
+    <!-- Botão Avançar -->
+    <button onclick="irPagina5()">Avançar 💙</button>
 </div>
 
 <audio id="musica">
@@ -132,7 +142,7 @@ function revelarTexto() {
     const musica = document.getElementById("musica");
 
     texto.style.opacity = "1";
-    texto.style.maxHeight = texto.scrollHeight + "px"; // Cresce conforme o conteúdo
+    texto.style.maxHeight = texto.scrollHeight + "px"; // cresce conforme conteúdo
 
     musica.play();
 }
@@ -157,7 +167,7 @@ setInterval(criarCoracao, 500);
 
 /* Redirecionar para página 5 */
 function irPagina5() {
-    window.location.href = "pagina5.html"; // Troque pelo URL real
+    window.location.href = "pagina5.html"; // Troque pelo endereço real da página 5
 }
 </script>
 
