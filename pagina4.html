@@ -2,22 +2,36 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Surpresa 💙</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+    background: url('https://www.publicdomainpictures.net/pictures/450000/nahled/herzen-muster-hintergrund-blau.jpg') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     text-align: center;
     color: white;
+    overflow-x: hidden;
+}
+
+/* Camada escura para melhorar leitura */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 0;
 }
 
 .container {
+    position: relative;
+    z-index: 2;
     max-width: 600px;
     width: 90%;
 }
@@ -34,15 +48,15 @@ button {
     font-size: 20px;
     border: none;
     border-radius: 12px;
-    background: #ff4d6d;
+    background: #4da6ff;
     color: white;
     cursor: pointer;
     transition: 0.3s;
-    box-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+    box-shadow: 0 0 15px rgba(77, 166, 255, 0.6);
 }
 
 button:hover {
-    background: #ff6680;
+    background: #66b3ff;
     transform: scale(1.05);
 }
 
@@ -56,10 +70,44 @@ button:hover {
     transition: opacity 2s ease, max-height 2s ease;
     white-space: pre-line;
 }
+
+/* CORAÇÕES */
+.coracoes {
+    position: fixed;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.coracao {
+    position: absolute;
+    bottom: -20px;
+    color: #4da6ff;
+    font-size: 20px;
+    animation: subir 6s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+    }
+}
 </style>
 </head>
 
 <body>
+
+<div class="coracoes" id="coracoes"></div>
 
 <div class="container">
     <img src="https://raw.githubusercontent.com/alexalieve013/Eu-te-amo/main/bernardo.jpg" alt="Foto">
@@ -78,17 +126,41 @@ Nunca perca essa essência linda que faz de você alguém tão especial.
 
 O mundo é grande,
 mas o seu coração é ainda maior.
-
-
     </div>
 </div>
+
+<audio id="musica">
+    <source src="https://raw.githubusercontent.com/alexalieve013/Eu-te-amo/main/FUNK%20do%20P%C3%A3o%20de%20Queijo%20%20Bolofofos%20-%20Bolofofos%20(youtube).mp3" type="audio/mpeg">
+</audio>
 
 <script>
 function revelarTexto() {
     const texto = document.getElementById("texto");
+    const musica = document.getElementById("musica");
+
     texto.style.opacity = "1";
     texto.style.maxHeight = "500px";
+
+    musica.play();
 }
+
+/* Gerar corações */
+function criarCoracao() {
+    const coracao = document.createElement("div");
+    coracao.classList.add("coracao");
+    coracao.innerHTML = "💙";
+    coracao.style.left = Math.random() * 100 + "vw";
+    coracao.style.fontSize = (15 + Math.random() * 25) + "px";
+    coracao.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+    document.getElementById("coracoes").appendChild(coracao);
+
+    setTimeout(() => {
+        coracao.remove();
+    }, 8000);
+}
+
+setInterval(criarCoracao, 500);
 </script>
 
 </body>
