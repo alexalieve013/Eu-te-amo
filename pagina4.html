@@ -53,6 +53,7 @@ button {
     cursor: pointer;
     transition: 0.3s;
     box-shadow: 0 0 15px rgba(77, 166, 255, 0.6);
+    margin-top: 15px;
 }
 
 button:hover {
@@ -118,12 +119,15 @@ button:hover {
 Oi Bernardo,
 
 Quero te dizer que você é realmente incrível! Sempre tão alegre, brincalhão e cheio de energia, 
-        é impossível não se encantar com o seu jeito. O seu carinho e a sua alegria contagiam todo mundo ao redor,
-        e é lindo ver como você é amoroso e divertido ao mesmo tempo.
+é impossível não se encantar com o seu jeito. O seu carinho e a sua alegria contagiam todo mundo ao redor,
+e é lindo ver como você é amoroso e divertido ao mesmo tempo.
 
 Continue sendo essa criança cheia de vida, rindo, brincando e espalhando alegria.
-        O mundo fica mais leve e bonito com você nele.
+O mundo fica mais leve e bonito com você nele.
     </div>
+
+    <!-- Novo botão para Página 5 -->
+    <button onclick="irPagina5()">Ir para Página 5 💙</button>
 </div>
 
 <audio id="musica">
@@ -158,6 +162,11 @@ function criarCoracao() {
 }
 
 setInterval(criarCoracao, 500);
+
+/* Função para ir para a página 5 */
+function irPagina5() {
+    window.location.href = "pagina5.html"; // Substitua pelo endereço real da página 5
+}
 </script>
 
 </body>
