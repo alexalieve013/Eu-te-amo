@@ -20,7 +20,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Camada escura para melhorar leitura */
+/* Camada escura */
 body::before {
     content: "";
     position: fixed;
@@ -94,14 +94,8 @@ button:hover {
 }
 
 @keyframes subir {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(-110vh) scale(1.5);
-        opacity: 0;
-    }
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
 }
 </style>
 </head>
@@ -116,18 +110,15 @@ button:hover {
     <button onclick="revelarTexto()">Revelar Texto 💙</button>
 
     <div id="texto">
-Oi Bernardo,
-
+Oi Bernardo,<br><br>
 Quero te dizer que você é realmente incrível! Sempre tão alegre, brincalhão e cheio de energia, 
 é impossível não se encantar com o seu jeito. O seu carinho e a sua alegria contagiam todo mundo ao redor,
-e é lindo ver como você é amoroso e divertido ao mesmo tempo.
-
+e é lindo ver como você é amoroso e divertido ao mesmo tempo.<br><br>
 Continue sendo essa criança cheia de vida, rindo, brincando e espalhando alegria.
 O mundo fica mais leve e bonito com você nele.
-        <BR><BR><BR>...
     </div>
 
-    <!-- Novo botão para Página 5 -->
+    <!-- Botão Página 5 -->
     <button onclick="irPagina5()">Ir para Página 5 💙</button>
 </div>
 
@@ -141,7 +132,7 @@ function revelarTexto() {
     const musica = document.getElementById("musica");
 
     texto.style.opacity = "1";
-    texto.style.maxHeight = "500px";
+    texto.style.maxHeight = texto.scrollHeight + "px"; // Cresce conforme o conteúdo
 
     musica.play();
 }
@@ -164,9 +155,9 @@ function criarCoracao() {
 
 setInterval(criarCoracao, 500);
 
-/* Função para ir para a página 5 */
+/* Redirecionar para página 5 */
 function irPagina5() {
-    window.location.href = "pagina5.html"; // Substitua pelo endereço real da página 5
+    window.location.href = "pagina5.html"; // Troque pelo URL real
 }
 </script>
 
